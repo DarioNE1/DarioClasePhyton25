@@ -16,27 +16,20 @@ def mostrar_sidebar():
     st.sidebar.title("Elegí tu modelo de IA favorito")
     modelo = st.sidebar.selectbox('elegí tu modelo',MODELOS,index=0)
     st.write(f'**Elegiste el modelo** {modelo}')
-    return modelo
-
-def mostrar_mensajes(role,content):
-    with st.chat_message(role):
-        st.markdown(content)
-
 def inicializar_estado_chat():
     if "mensajes" not in st.session_state:
         st.session_state.mensajes = []
-
 def obtener_mensajes_previos():
     for mensaje in st.session_state.mensajes:
             with st.chat_message(mensaje['rol']):
                 st.markdown(mensaje['content'])
-
 def obtener_mensaje_usuario():
     return st.chat_input("Envia tu mensaje al asistente")
-
 def agregar_mensajes_previos(role, content):
     st.session_state.mensajes.append({"role": role, "content": content})
-
+def mostrar_mensajes(role,content):
+    with st.chat_message(role):
+        st.markdown(content)
 def obtener_respuesta_modelo(cliente, modelo, mensaje):
     respuesta = cliente.chat.completions.create(
         model = modelo,
@@ -44,7 +37,6 @@ def obtener_respuesta_modelo(cliente, modelo, mensaje):
         stream = False
     )
     return respuesta.choices[0].message.content
-
 def ejecutar_chat():
     configurar_pagina()
     cliente = crear_cliente_groq()
@@ -62,6 +54,13 @@ def ejecutar_chat():
 
         agregar_mensajes_previos("assistant",respuesta_contenido)
         mostrar_mensajes("assistant",respuesta_contenido)
+
+
+
+
+
+
+
 
 
 if __name__ == '__main__':
