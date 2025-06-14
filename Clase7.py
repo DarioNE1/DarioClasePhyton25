@@ -32,7 +32,7 @@ def obtener_mensajes_previos():
                 st.markdown(mensaje['content'])
 
 def obtener_mensaje_usuario():
-    return st.chat_input("Envia tu mensaje")
+    return st.chat_input("Envia tu mensaje al asistente")
 
 def agregar_mensajes_previos(role, content):
     st.session_state.mensajes.append({"role": role, "content": content})
