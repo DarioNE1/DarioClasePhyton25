@@ -51,6 +51,7 @@ def ejecutar_chat():
     modelo = mostrar_sidebar()
 
     inicializar_estado_chat()
+    obtener_mensajes_previos()
     mensaje_usuario = obtener_mensaje_usuario()
 
 
@@ -62,7 +63,7 @@ def ejecutar_chat():
 
         agregar_mensajes_previos("assistant",respuesta_contenido)
         mostrar_mensajes("assistant",respuesta_contenido)
-
+        st.rerun()
 
 if __name__ == '__main__':
     ejecutar_chat()
